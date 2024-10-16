@@ -1,97 +1,25 @@
-//api ne marche pas , je garde le code precedent pour ne pas rester bloquer
-//async function loadData() {
- //   const response = await fetch("https://hp-api.onrender.com/api/characters")
-   //     .then((response) => response.json())
-    //    .catch((error) => alert("Erreur : " + error));
-//
-   // console.log(response);
+async function loadData() {
+   const response = await fetch("https://hp-api.onrender.com/api/characters")
+       .then((response) => response.json())
+        .catch((error) => alert("Erreur : " + error));
 
-   // let main = document.querySelector("main");
-   // main.innerHTML = "";  
+ console.log(response);
 
-   // const limitedCharacters = response.slice(0, 12); 
+    let main = document.querySelector(".characters");
+    main.innerHTML = "";  
 
-   // for (const character of limitedCharacters) {
-       // let div = document.createElement("div");
-       // const house = character.house || "Aucune maison"; 
+    const limitedCharacters = response.slice(0, 12); 
 
-        //div.innerHTML = `
-         //   <div>
-           //     <picture>
-           //         <img src="${character.image}" alt="Image de ${character.name}" />
-            //    </picture>
-             //   <p>${character.name}</p>
-              //  <p>Maison : ${house}</p>
-          //  </div>`;
-      //  main.appendChild(div); 
-  //  }
-//}
+    for (const character of limitedCharacters) {
+        let div = document.createElement("div");
 
-
-document.querySelectorAll('.houses img').forEach((houseImage) => {
-    houseImage.addEventListener('click', function () {
-        const selectedHouse = this.dataset.house;
-        filterCharactersByHouse(selectedHouse);
-    });
-});
-
-function filterCharactersByHouse(house) {
-    const characters = document.querySelectorAll('.characters > div');
-
-    characters.forEach((character) => {
-        const characterHouse = character.getAttribute('maison'); 
-        if (characterHouse === house || !house) {
-            character.style.display = 'block';
-        } else {
-            character.style.display = 'none'; 
-        }
-    });
+        div.innerHTML = `
+          <div class="character.name"> 
+                <img src="${character.image}" alt="Image de ${character.name}" />
+               <p>${character.name}</p>
+           </div>`;
+        main.appendChild(div); 
+    }
 }
 
-const characterDivs = document.querySelectorAll('.characters > div');
-characterDivs.forEach((div) => {
-    const characterName = div.querySelector('p').innerText; 
-    if (characterName.includes('Harry') || characterName.includes('Ron') || characterName.includes('Hermione') || characterName.includes('Mcgonagall')) {
-        div.setAttribute('maison', 'Gryffindor');
-    } else if (characterName.includes('Cedric')) {
-        div.setAttribute('maison', 'Hufflepuff');
-    } else if (characterName.includes('Cho')) {
-        div.setAttribute('maison', 'Ravenclaw');
-    } else if (characterName.includes('Draco')) {
-        div.setAttribute('maison', 'Slytherin');
-    } else {
-        div.setAttribute('maison', 'Aucune maison');
-    }
-});
-
-div.addEventListener('click', () => {
-    const params = new URLSearchParams({
-        name: characterName,
-        house: house,
-        image: characterImage
-    });
-
-    window.location.href = `details.html?${params.toString()}`;
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const characterDivs = document.querySelectorAll('.characters > div');
-    const charactersArray = Array.from(characterDivs);
-
-    const sortButton = document.getElementById('sort-button');
-    sortButton.addEventListener('click', () => {
-
-        charactersArray.sort((a, b) => {
-            const nameA = a.querySelector('p').innerText.toLowerCase(); 
-            const nameB = b.querySelector('p').innerText.toLowerCase(); 
-            return nameA.localeCompare(nameB); 
-        });
-
-        const charactersContainer = document.querySelector('.characters');
-        charactersContainer.innerHTML = ''; 
-
-        charactersArray.forEach((div) => {
-            charactersContainer.appendChild(div);
-        });
-    });
-});
+loadData();
