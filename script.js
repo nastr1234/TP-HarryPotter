@@ -73,3 +73,25 @@ div.addEventListener('click', () => {
 
     window.location.href = `details.html?${params.toString()}`;
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const characterDivs = document.querySelectorAll('.characters > div');
+    const charactersArray = Array.from(characterDivs);
+
+    const sortButton = document.getElementById('sort-button');
+    sortButton.addEventListener('click', () => {
+
+        charactersArray.sort((a, b) => {
+            const nameA = a.querySelector('p').innerText.toLowerCase(); 
+            const nameB = b.querySelector('p').innerText.toLowerCase(); 
+            return nameA.localeCompare(nameB); 
+        });
+
+        const charactersContainer = document.querySelector('.characters');
+        charactersContainer.innerHTML = ''; 
+
+        charactersArray.forEach((div) => {
+            charactersContainer.appendChild(div);
+        });
+    });
+});
