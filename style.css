@@ -1,5 +1,3 @@
-
-
 :root {
   --light: #fff6e6;
   --darkGrey: #3a3a3a;
@@ -213,19 +211,6 @@ header ul {
   }
 }
 
-.houses img {
-  width: 121px;
-  height: 136px;
-}
-
-.characters img {
-  width: 150px;
-  height: 150px;
-  border-radius: 150px;
-  border: 8px solid #B99049; 
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
 .characters .cedric img:hover { 
   border-color: #E1B50C;
 }
@@ -238,7 +223,7 @@ header ul {
   border-color:#124B10;
 }
 
-.characters .harry img:hover, 
+.characters .HarryPotter img:hover, 
 .characters .hermione img:hover, 
 .characters .ron img:hover, 
 .characters .mcgonagall img:hover { 
